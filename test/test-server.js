@@ -4,7 +4,7 @@ const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 
 const { app, runServer, closeServer } = require('../server');
-const { TEST_DATABASE_URL } = require('../config');
+const { TEST_DATABASE_URL } = require('../config/config');
 
 describe('static routes', function() {
   before(function() {
