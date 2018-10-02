@@ -7,12 +7,7 @@ const cors = require('cors');
 const app = express();
 
 mongoose.Promise = global.Promise;
-mongoose.connect(
-  config.DATABASE,
-  {
-    useNewUrlParser: true,
-  }
-);
+mongoose.connect(config.DATABASE);
 
 const { DATABASE_URL, PORT } = require('./config/config');
 const { User } = require('./models/user');

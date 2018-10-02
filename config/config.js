@@ -1,6 +1,6 @@
 const config = {
   production: {
-    SECRET: process.env.SECRET,
+    SECRET: 'SUPERSECRETPASSWORD123',
     DATABASE: 'mongodb://user1:password1@ds119343.mlab.com:19343/book_shelf',
   },
   default: {
@@ -19,5 +19,5 @@ exports.DATABASE_URL =
 exports.TEST_DATABASE_URL =
   process.env.TEST_DATABASE_URL || 'mongodb://localhost/book_shelf';
 exports.PORT = process.env.PORT || 8080;
-exports.JWT_SECRET = process.env.JWT_SECRET || 'Liam';
-exports.JWT_EXPIRY = process.env.JWT_EXPIRY || '5d';
+// exports.JWT_SECRET = process.env.JWT_SECRET || 'Liam';
+// exports.JWT_EXPIRY = process.env.JWT_EXPIRY || '5d';
