@@ -19,13 +19,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 app.use(express.static('client/build'));
-app.use(
-  '/api/*',
-  proxy({
-    target: 'https://dry-waters-53761.herokuapp.com',
-    changeOrigin: true,
-  })
-);
+
 app.use(cors());
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
