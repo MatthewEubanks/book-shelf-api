@@ -20,7 +20,7 @@ app.use(cookieParser());
 
 app.use(express.static('client/build'));
 app.use(
-  '/api',
+  '/api/*',
   proxy({
     target: 'https://dry-waters-53761.herokuapp.com',
     changeOrigin: true,
