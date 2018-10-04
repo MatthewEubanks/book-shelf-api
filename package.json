@@ -6,7 +6,7 @@
   "scripts": {
     "test": "mocha --exit",
     "start": "node server/server.js",
-    "server": "nodemon server/server.js --ignore client"
+    "server": "nodemon server/server.js"
   },
   "engines": {
     "node": "8.6.0"
