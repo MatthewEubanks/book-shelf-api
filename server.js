@@ -216,5 +216,11 @@ if (require.main === module) {
   let database = config.DATABASE;
   runServer(database).catch(err => console.error(err));
 }
+if (process.env.NODE_ENV === 'production') {
+  const path = require('path');
+  app.get('/*', (req, res) => {
+    res.sendfile(path.resolve(__dirname, '../client', 'build', 'index.html'));
+  });
+}
 
 module.exports = { app, runServer, closeServer };
