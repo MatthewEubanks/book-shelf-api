@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const config = require('./config/config').get(process.env.NODE_ENV);
+const proxy = require('http-proxy-middleware');
 const cors = require('cors');
 const app = express();
 
@@ -18,6 +19,13 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 app.use(express.static('client/build'));
+app.use(
+  '/api',
+  proxy({
+    target: 'https://dry-waters-53761.herokuapp.com',
+    changeOrigin: true,
+  })
+);
 app.use(cors());
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
