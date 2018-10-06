@@ -41,36 +41,33 @@ function seedBookData() {
   return Book.insertMany(seedData);
 }
 
-describe('book review API resource', () => {
-  before(function() {
-    return runServer(TEST_DATABASE_URL);
-  });
-  beforeEach(function() {
-    return seedBookData();
-  });
-  afterEach(function() {
-    return tearDownDb();
-  });
-  after(function() {
-    return closeServer();
-  });
+// describe('book review API resource', () => {
+//   before(function() {
+//     return runServer(TEST_DATABASE_URL);
+//   });
+//   beforeEach(function() {
+//     return seedBookData();
+//   });
+//   afterEach(function() {
+//     return tearDownDb();
+//   });
+//   after(function() {
+//     return closeServer();
+//   });
 
-  describe('GET endpoint', () => {
-    it('should return all existing book reviews', () => {
-      let res;
-      return chai
-        .request(app)
-        .get('/api/books')
-        .then(_res => {
-          res = _res;
-          res.should.have.status(200);
-          res.body.should.have.lengthOf.at.least(1);
-
-          return Book.count();
-        })
-        .then(count => {
-          res.body.should.have.lengthOf(count);
-        });
-    });
+describe('GET endpoint', () => {
+  it('should return all existing book reviews', function(done) {
+    let res;
+    chai
+      .request(app)
+      .get('/api/books?skip=3&limit=2&order=asc')
+      .end(function(err, res) {
+        console.log(res.body);
+        res.should.have.status(200);
+        res.should.be.json;
+        res.body.should.be.a('array');
+        done();
+      });
   });
 });
+// });

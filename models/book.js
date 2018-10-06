@@ -36,6 +36,18 @@ const bookSchema = mongoose.Schema(
   { timestamps: true }
 );
 
+bookSchema.methods.serialize = function() {
+  return {
+    name: this.name,
+    author: this.author,
+    review: this.review,
+    pages: this.pages,
+    rating: this.rating,
+    price: this.price,
+    ownerId: this.ownerId,
+  };
+};
+
 const Book = mongoose.model('Book', bookSchema);
 
 module.exports = { Book };
