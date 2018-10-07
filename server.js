@@ -20,11 +20,12 @@ app.use(express.static('client/build'));
 
 app.use(
   cors({
-    origin: 'https://fast-forest-94723.herokuapp.com/',
+    credentials: true,
+    origin: 'https://fast-forest-94723.herokuapp.com',
   })
 );
 // app.use(function(req, res, next) {
-//   res.header('Access-Control-Allow-Origin', '*');
+//   res.header('Access-Control-Allow-Origin', 'https://fast-forest-94723.herokuapp.com');
 //   res.header(
 //     'Access-Control-Allow-Headers',
 //     'Origin, X-Requested-With, Content-Type, Accept'
