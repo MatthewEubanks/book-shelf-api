@@ -8,7 +8,7 @@ const app = express();
 
 mongoose.Promise = global.Promise;
 mongoose.connect(config.DATABASE);
-const { DATABASE_URL, PORT } = require('./config/config');
+const { DATABASE_URL, PORT, CLIENT_ORIGIN } = require('./config/config');
 const { User } = require('./models/user');
 const { Book } = require('./models/book');
 const { auth } = require('./middleware/auth');
@@ -18,16 +18,19 @@ app.use(cookieParser());
 
 app.use(express.static('client/build'));
 
-// app.use(cors());
-app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept'
-  );
-  next();
-});
+app.use(
+  cors({
+    origin: CLIENT_ORIGIN,
+  })
+);
+// app.use(function(req, res, next) {
+//   res.header('Access-Control-Allow-Origin', '*');
+//   res.header(
+//     'Access-Control-Allow-Headers',
+//     'Origin, X-Requested-With, Content-Type, Accept'
+//   );
+//   next();
+// });
 
 // GET //
 app.get('/api/auth', auth, (req, res) => {

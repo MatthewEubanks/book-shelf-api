@@ -13,6 +13,8 @@ exports.get = function get(env) {
   return config[env] || config.default;
 };
 
+exports.CLIENT_ORIGIN = process.env.CLIENT_ORIGIN || 'http://localhost:3000';
+
 exports.DATABASE_URL =
   process.env.DATABASE_URL ||
   'mongodb://user1:password1@ds119343.mlab.com:19343/book_shelf';
