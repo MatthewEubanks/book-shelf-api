@@ -24,14 +24,6 @@ app.use(
     origin: 'https://fast-forest-94723.herokuapp.com',
   })
 );
-// app.use(function(req, res, next) {
-//   res.header('Access-Control-Allow-Origin', 'https://fast-forest-94723.herokuapp.com');
-//   res.header(
-//     'Access-Control-Allow-Headers',
-//     'Origin, X-Requested-With, Content-Type, Accept'
-//   );
-//   next();
-// });
 
 // GET //
 app.get('/api/auth', auth, (req, res) => {
@@ -51,7 +43,7 @@ app.get('/api/logout', auth, (req, res) => {
   });
 });
 
-app.get('/api/getBook', (req, res) => {
+app.get('/api/books/:id', (req, res) => {
   let id = req.query.id;
 
   Book.findById(id, (err, doc) => {
@@ -77,7 +69,7 @@ app.get('/api/books', (req, res) => {
     });
 });
 
-app.get('/api/getReviewer', (req, res) => {
+app.get('/api/users/:id', (req, res) => {
   let id = req.query.id;
 
   User.findById(id, (err, doc) => {
@@ -104,19 +96,18 @@ app.get('/api/user_posts', (req, res) => {
 });
 
 // POST //
-app.post('/api/book', (req, res) => {
+app.post('/api/books', (req, res) => {
+  console.log(req.body);
   const book = new Book(req.body);
 
   book.save((err, doc) => {
     if (err) return res.status(400).send(err);
-    res.status(200).json({
-      post: true,
-      bookId: doc._id,
-    });
+    res.status(200).json(book.serialize());
   });
 });
 
-app.post('/api/register', (req, res) => {
+//register new user//
+app.post('/api/users', (req, res) => {
   const user = new User(req.body);
 
   user.save((err, doc) => {
@@ -156,7 +147,7 @@ app.post('/api/login', (req, res) => {
 });
 
 // UPDATE //
-app.post('/api/book_update', (req, res) => {
+app.put('/api/books/', (req, res) => {
   Book.findByIdAndUpdate(req.body._id, req.body, { new: true }, (err, doc) => {
     if (err) return res.status(400).send(err);
     res.json({
@@ -168,7 +159,7 @@ app.post('/api/book_update', (req, res) => {
 
 // DELETE //
 
-app.delete('/api/delete_book', (req, res) => {
+app.delete('/api/books', (req, res) => {
   let id = req.query.id;
 
   Book.findByIdAndRemove(id, (err, doc) => {
@@ -181,7 +172,7 @@ app.delete('/api/delete_book', (req, res) => {
 
 let server;
 
-function runServer(databaseUrl, port = PORT) {
+function runServer(databaseUrl = DATABASE_URL, port = PORT) {
   return new Promise((resolve, reject) => {
     mongoose.connect(
       databaseUrl,
