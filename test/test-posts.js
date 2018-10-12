@@ -42,6 +42,9 @@ function seedBookData() {
   return Book.insertMany(seedData);
 }
 
+const email = 'demo@demo.com'
+const password = 'password'
+
 describe('book review API resource', () => {
   before(function() {
     return runServer(TEST_DATABASE_URL);

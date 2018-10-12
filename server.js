@@ -6,9 +6,10 @@ const config = require('./config/config').get(process.env.NODE_ENV);
 const cors = require('cors');
 const app = express();
 
-mongoose.Promise = global.Promise;
 mongoose.connect(config.DATABASE);
-const { DATABASE_URL, PORT, CLIENT_ORIGIN } = require('./config/config');
+mongoose.Promise = global.Promise;
+
+const { DATABASE_URL, PORT } = require('./config/config');
 const { User } = require('./models/user');
 const { Book } = require('./models/book');
 const { auth } = require('./middleware/auth');
@@ -24,14 +25,6 @@ app.use(
     origin: 'https://fast-forest-94723.herokuapp.com',
   })
 );
-// app.use(function(req, res, next) {
-//   res.header('Access-Control-Allow-Origin', 'https://fast-forest-94723.herokuapp.com');
-//   res.header(
-//     'Access-Control-Allow-Headers',
-//     'Origin, X-Requested-With, Content-Type, Accept'
-//   );
-//   next();
-// });
 
 // GET //
 app.get('/api/auth', auth, (req, res) => {
