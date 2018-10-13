@@ -35,15 +35,15 @@ function seedBookData() {
       pages: faker.random.number(),
       rating: '4',
       price: faker.finance.amount(),
-      ownerId: faker.random.number(),
+      ownerId: '5bc02d28e8ccfb0004b0540d',
     });
   }
   // this will return a promise
   return Book.insertMany(seedData);
 }
 
-const email = 'demo@demo.com'
-const password = 'password'
+const email = 'demo@demo.com';
+const password = 'password';
 
 describe('book review API resource', () => {
   before(function() {
@@ -125,7 +125,7 @@ describe('book review API resource', () => {
     it('should add a SINGLE book on /api/book', done => {
       chai
         .request(app)
-        .post('/api/books')
+        .post('/api/book')
         .send({
           name: faker.lorem.words(),
           author: faker.name.findName(),
@@ -139,14 +139,13 @@ describe('book review API resource', () => {
           res.should.have.status(200);
           res.should.be.json;
           res.body.should.be.a('object');
-          res.body.should.have.property('ownerId');
           done();
         });
     });
     it('should return the user', done => {
       chai
         .request(app)
-        .post('/api/users')
+        .post('/api/register')
         .send({
           email: faker.internet.email(),
           password: faker.internet.password(),
@@ -173,30 +172,16 @@ describe('book review API resource', () => {
   });
   describe('PUT endpoint', () => {
     it('should should update fields sent over', done => {
-      const updateBook = {
-        name: faker.lorem.words(),
-        author: faker.name.findName(),
-        review: faker.lorem.paragraph(),
-        pages: faker.random.number(),
-        rating: 3,
-        price: faker.finance.amount(),
-        ownerId: faker.random.alphaNumeric(),
-      };
+      const singleBook = '5bc2354a23fdeb1f70b4a20c';
       chai
         .request(app)
         .get('/api/books')
         .end(function(err, res) {
           chai
             .request(app)
-            .put('/api/books/?id=' + res.body[0]._id)
+            .post('/api/book_update?id=' + res.body[0]._id)
             .send({
-              name: faker.lorem.words(),
-              author: faker.name.findName(),
-              review: faker.lorem.paragraph(),
-              pages: faker.random.number(),
-              rating: 3,
-              price: faker.finance.amount(),
-              ownerId: faker.random.alphaNumeric(),
+              review: 'Easy man',
             })
             .end(function(error, response) {
               response.should.have.status(200);
@@ -213,7 +198,7 @@ describe('book review API resource', () => {
         .end(function(err, res) {
           chai
             .request(app)
-            .delete('/api/books?id=' + res.body[0]._id)
+            .delete('/api/delete_book?id=' + res.body[0]._id)
             .end(function(error, response) {
               response.should.have.status(200);
               done();
