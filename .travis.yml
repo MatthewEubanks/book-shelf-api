@@ -8,7 +8,7 @@ env:
 deploy:
   provider: heroku
   api_key:
-    secure: s++42S6iQGNoueGb9bF4LkTLdOgESkXUB4BpqyOgvl6RBZDM6oUH6iDymeeBy58mMjCjybFIqVzTmbpb4dBHTrUGfVsf5fvMbMI9Y17NUJ2mE5QMw49Dq7XB5ykqZbjYWfTY1+IX9AbnD5nxIQEmTgSUy2QD3UQXs2qL1dW7JKDgscuxn1v/+t/LV6wDdj9SBQ8EW/M0tgC4q6vdgEgShItCKNmMI1koh3REyBIPGTQk0dQnGvPeLM0K7L4GAOPeQSIC1Ts65/il6vBd4bfpTkDLdiRVut+E6xoYD5zubpEraQOuhYsRCUFLcYJWBhki8VCFezvnqIh3fo45qDOp674vUTfRFstBJRePm2F5GkE3mOBjJX7wG12rEQWE0aYQLlFchVCBGaVYJOHg074uQyO+ZstQ8G1PtcWz8IOfaslnAfZNoHXYJ8MQXskkriAJqYodB0nIWUhT1YAkkK4ASgtuYB2UOq51FNpgHUgeK56V0e24PdaXZnzkIVxUL0NhJUsL3SCGURxhqaFituKOBeUqn//1MdTF+yfvCPkN0teHL6lbnfi3IY/Qgbz4gIZJOXyI+22+yiVstJfYn+/+SeqXzDTYL+cIPVtOjbhj0wFU9ddkUlcLcDzvkjAsYo530HATBenF6rx2oqpoLAshLjZfb0zcuW5bSxS+CGE3Ym8=
-  app: fast-forest-94723
+    secure: 63d3bf86-c743-4e25-b00b-7ac614dffe36
+  app: dry-waters-53761
   on:
     repo: matteprg/book-shelf-api
