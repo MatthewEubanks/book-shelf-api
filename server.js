@@ -22,7 +22,7 @@ app.use(express.static('client/build'));
 app.use(
   cors({
     credentials: true,
-    origin: 'https://fast-forest-94723.herokuapp.com',
+    origin: 'https://matts-book-shelf.herokuapp.com/',
   })
 );
 
